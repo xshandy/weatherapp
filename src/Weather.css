@@ -1,0 +1,21 @@
+.Weather {
+    background-color: rgba(0, 204, 255, 0.208);
+}
+
+
+.Weather h1 {
+    color:rgb(158, 169, 171);
+    font-weight: bolder;
+    font-size: 25px;
+}
+
+.Weather ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+.Weather li {
+    font-size: 18px;
+
+}
