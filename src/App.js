@@ -8,7 +8,7 @@ function App() {
       <div className="container">
        
     
-     <Weather />
+     <Weather defaultCity="Seoul" />
     
      <footer>
       This project was coded by Shandy Shek and is <a href="https://github.com/xshandy/weatherapp" target="_blank" rel="noopener noreferrer">open-sourced on Github.</a>
