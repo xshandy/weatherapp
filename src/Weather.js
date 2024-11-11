@@ -6,14 +6,23 @@ import WeatherTemperature from "./WeatherTemperature";
 
 export default function Weather(props) {
   const [weatherData, setWeatherData] = useState({ ready: false });
-  const [city, setCity] = useState(props.defaultCity || "London"); // default to London
-  const [inputCity, setInputCity] = useState(props.defaultCity || "London"); // local input state
+  const [city, setCity] = useState(props.defaultCity || "London"); 
+  const [inputCity, setInputCity] = useState(props.defaultCity || "London"); 
 
   useEffect(() => {
+    function search() {
+        const apiKey = "6643c7326a4c2a38838264a28531d97e";
+        let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+        axios
+          .get(apiUrl)
+          .then(handleResponse)
+          .catch(handleError);
+      }
+    
     if (city) {
       search();
     }
-  }, [city]); // Trigger search when `city` changes
+  }, [city]); 
 
   function handleResponse(response) {
     setWeatherData({
@@ -33,22 +42,14 @@ export default function Weather(props) {
     alert("Sorry, there was an error fetching the weather data.");
   }
 
-  function search() {
-    const apiKey = "6643c7326a4c2a38838264a28531d97e";
-    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
-    axios
-      .get(apiUrl)
-      .then(handleResponse)
-      .catch(handleError);
-  }
 
   function handleSubmit(event) {
     event.preventDefault();
-    setCity(inputCity); // Update the city state with the value from input
+    setCity(inputCity); 
   }
 
   function handleInputChange(event) {
-    setInputCity(event.target.value); // Update local input state
+    setInputCity(event.target.value); 
   }
 
   if (weatherData.ready) {
