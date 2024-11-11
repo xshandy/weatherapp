@@ -1,21 +1,108 @@
+
 .Weather {
     background-color: rgba(0, 204, 255, 0.208);
-}
-
-
-.Weather h1 {
-    color:rgb(158, 169, 171);
+    padding: 20px 10px;
+  }
+  
+  .Weather-header {
+    padding: 30px; 
+    margin-bottom: 20px;
+  }
+  
+  .Weather h1 {
+    color: rgb(158, 169, 171);
     font-weight: bolder;
-    font-size: 25px;
-}
-
-.Weather ul {
+    font-size: 70px; 
     margin: 0;
+    text-align: center;
+  }
+  
+  .Weather .search-container {
+    display: flex;
+    justify-content: center; 
+    margin-top: 10px;
+    width: 100%;
+  }
+  
+  .Weather input[type="search"] {
+    font-size: 18px;
+    padding: 8px;
+    border-radius: 20px;
+    border: 1px solid #00b5cc;
+    width: 100%; 
+    margin: 12px;
+    box-sizing: border-box;
+  }
+  
+  .Weather input[type="submit"] {
+    font-size: 16px;
+    padding: 10px 20px;
+    border: none;
+    background-color: #00b5cc;
+    color: white;
+    border-radius: 20px;
+    cursor: pointer;
+    margin-left: 10px;
+  }
+  
+
+  .Weather input[type="submit"]:hover {
+    background-color: #0099b3;
+  }
+  
+  
+  .WeatherTemperature {
+    display: flex;
+    justify-content: center; 
+    font-size: 48px; 
+    font-weight: bold;
+    
+  }
+  
+  .WeatherTemperature .temperature {
+    margin-right: 10px;
+  }
+  
+  .WeatherTemperature .unit {
+    font-size: 20px;
+    cursor: pointer;
+    font-weight: normal;
+    margin-left: 10px;
+    
+  }
+
+  .WeatherTemperature a {
+    color: rgb(50, 200, 216);
+  }
+
+  .WeatherTemperature a:hover {
+    color: white;
+  }
+
+
+
+  .Weather ul {
+    margin: 20px 0;
     padding: 0;
     list-style-type: none;
-}
-
-.Weather li {
-    font-size: 18px;
-
-}
+    text-align: center; 
+    font-weight: bold;
+    
+  }
+  
+  .Weather li {
+    font-size: 20px;
+    color: rgb(50, 200, 216);
+  }
+  
+  .Weather img {
+    display: block;
+    margin: 0 auto;
+    max-width: 100px;
+    height: auto;
+  }
+  
+  .Weather .row {
+    margin-top: 20px;
+  }
+  

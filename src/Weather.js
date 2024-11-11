@@ -54,33 +54,33 @@ export default function Weather(props) {
   if (weatherData.ready) {
     return (
       <div className="Weather">
-        <form onSubmit={handleSubmit}>
-          <div className="row">
-            <div className="col-9">
+        <div className="Weather-header">
+          <h1>{weatherData.city}</h1>
+          <div className="search-container">
+            <form onSubmit={handleSubmit}>
               <input
                 type="search"
                 placeholder="Enter a city.."
                 className="form-control"
-                value={inputCity} // Bind the input value to the local state
-                onChange={handleInputChange} // Update the local state as you type
+                value={inputCity}
+                onChange={handleInputChange}
               />
-            </div>
-            <div className="col-3">
               <input
                 type="submit"
                 value="Search"
                 className="btn btn-primary w-100"
               />
-            </div>
+            </form>
           </div>
-        </form>
-        <h1>{weatherData.city}</h1>
+        </div>
+       
         <ul>
           <li>
             <FormattedDate date={weatherData.date} />
-          </li>
+            </li>
           <li className="text-capitalize">{weatherData.description}</li>
         </ul>
+        
         <div className="row">
           <div className="col-6">
             <img src={weatherData.iconUrl} alt={weatherData.description} />
