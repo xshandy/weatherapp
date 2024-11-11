@@ -6,6 +6,7 @@ import "./Weather.css";
 export default function Weather(props) {
   const [weatherData, setWeatherData] = useState({ready:false});
 const [city, setCity] = useState(props.defaultCity);
+
   function handleResponse(response) {
     setWeatherData({
         ready: true,
@@ -15,6 +16,7 @@ const [city, setCity] = useState(props.defaultCity);
       humidity: response.data.main.humidity,
       city: response.data.name,
       description: response.data.weather[0].description,
+      iconUrl: `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
     });
     
   }
@@ -56,7 +58,7 @@ setCity(event.target.value);
         </ul>
         <div className="row">
           <div className="col-6">
-            <img src="https://ssl.gstatic.com/onebox/weather/64/sunny.png" alt="sunny" />
+          <img src={weatherData.iconUrl} alt={weatherData.description} />
             <span className="temperature">{Math.round(weatherData.temperature)}</span>
             <span className="unit">°C</span>
           </div>
