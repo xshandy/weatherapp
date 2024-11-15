@@ -1,0 +1,30 @@
+
+.WeatherTemperature {
+    font-size: 42px;
+    font-weight: bold;
+    display: flex;
+    align-items: baseline;
+  }
+  
+  .temperature {
+    font-size: 60px;
+    margin-right: 10px;
+  }
+  
+  .unit {
+    font-size: 22px;
+    color: #777;
+    display: flex;
+    align-items: baseline;
+  }
+  
+  .unit a {
+    color: #FFDB02;
+    text-decoration: none;
+    margin-left: 5px;
+  }
+  
+  .unit a:hover {
+    text-decoration: underline;
+  }
+  

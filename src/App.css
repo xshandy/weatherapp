@@ -1,9 +1,65 @@
-.App footer {
-    font-size: 12px;
-    margin: 20px;
-    text-align: center;
+body {
+    background-color: #87ceeb; 
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+  
+  .App {
+    width: 100%;
+    max-width: 600px; 
+    margin-top: 20px;
+  }
+  
+  
+.search-bar form {
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .search-bar input {
+    flex-grow: 1;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 10px; 
+  }
+  
+  .search-bar button {
+    padding: 12px 25px;
+    background-color: #ccc;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .search-bar button:hover {
+    background-color: #FFDB02;
+  }
+
+.search-bar {
+    margin-bottom: 30px;
 }
 
-.container {
-    margin-top: 30px;
-}
+.weather-search-input {
+    margin-bottom: 10px;
+  }
+  
+
+  footer {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 14px;
+    color: #555;
+  }
+
+  footer a {
+    color: white;
+  }

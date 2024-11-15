@@ -1,108 +1,181 @@
 
-.Weather {
-    background-color: rgba(0, 204, 255, 0.208);
-    padding: 20px 10px;
-  }
-  
-  .Weather-header {
-    padding: 30px; 
-    margin-bottom: 20px;
-  }
-  
-  .Weather h1 {
-    color: rgb(158, 169, 171);
-    font-weight: bolder;
-    font-size: 70px; 
-    margin: 0;
-    text-align: center;
-  }
-  
-  .Weather .search-container {
-    display: flex;
-    justify-content: center; 
-    margin-top: 10px;
-    width: 100%;
-  }
-  
-  .Weather input[type="search"] {
-    font-size: 18px;
-    padding: 8px;
-    border-radius: 20px;
-    border: 1px solid #00b5cc;
-    width: 100%; 
-    margin: 12px;
-    box-sizing: border-box;
-  }
-  
-  .Weather input[type="submit"] {
-    font-size: 16px;
-    padding: 10px 20px;
-    border: none;
-    background-color: #00b5cc;
-    color: white;
-    border-radius: 20px;
-    cursor: pointer;
-    margin-left: 10px;
-  }
-  
-
-  .Weather input[type="submit"]:hover {
-    background-color: #0099b3;
-  }
-  
-  
-  .WeatherTemperature {
-    display: flex;
-    justify-content: center; 
-    font-size: 48px; 
-    font-weight: bold;
-    
-  }
-  
-  .WeatherTemperature .temperature {
-    margin-right: 10px;
-  }
-  
-  .WeatherTemperature .unit {
-    font-size: 20px;
-    cursor: pointer;
-    font-weight: normal;
-    margin-left: 10px;
-    
-  }
-
-  .WeatherTemperature a {
-    color: rgb(50, 200, 216);
-  }
-
-  .WeatherTemperature a:hover {
-    color: white;
-  }
+.weather-app-container {
+  background-color: white;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+}
 
 
+.weather-app-data {
+  display: flex;
+ justify-content: space-between;
+ align-items: flex-start;
+ width: 100%;
+ margin-bottom: 20px;
 
-  .Weather ul {
-    margin: 20px 0;
-    padding: 0;
-    list-style-type: none;
-    text-align: center; 
-    font-weight: bold;
-    
-  }
+}
+
+.weather-app-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; 
+  justify-content: flex-start; 
+}
+
+
+.weather-app-city {
+  font-size: 42px;
+  font-weight: 600;
+  text-align: left; 
+  margin: 0;
+}
+
+.weather-app-date {
+  font-size: 18px; 
+  color: rgba(39, 33, 66, 0.7); 
+  text-align: left;
+  margin-top: 5px;
+}
+
+.weather-app-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; 
+  justify-content: flex-start; 
+}
+
+
+.weather-app-details {
+  font-size: 17px;
+  color: rgba(39, 33, 66, 0.7);
+  line-height: 24px;
+  font-weight: 500;
+  max-width: 400px;
+  margin-top: 20px;
+  text-transform: capitalize;
   
-  .Weather li {
-    font-size: 20px;
-    color: rgb(50, 200, 216);
-  }
+}
+
+.weather-app-temperature-container {
+  display: flex;
+  justify-content: center;
+ 
+}
+
+.weather-app-icon {
+  width: 88px;
+  height: 88px;
+  margin-right: 20px;
+}
+
+.weather-app-temperature {
+  font-size: 88px;
+  line-height: 88px;
+  font-weight: bold;
+  color: #333;
+}
+
+.weather-app-unit {
+  margin-top: 6px;
+  font-size: 28px;
+}
+
+
+.search-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.weather-search-input {
+  width: 100%;
+  padding: 10px;
+  margin-right: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.weather-search-button {
+  padding: 10px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.weather-search-button:hover {
+  background-color: #45a049;
+}
+
+
+.weather-forecast {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 30px;
+  gap: 18px;
+}
+
+.weather-forecast-day {
+  text-align: center;
+  flex: 1;
+}
+
+.weather-forecast-date {
+  color: #87ceeb;
+  font-size: 16px;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.weather-forecast-icon {
+  width: 88px;
+  height: 88px;
+  margin-bottom: 10px;
+}
+
+.weather-forecast-temperatures {
+  color: rgba(33, 34, 66, 0.621);
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
   
-  .Weather img {
-    display: block;
-    margin: 0 auto;
-    max-width: 100px;
-    height: auto;
+}
+
+.weather-forecast-temperature {
+  padding: 0 10px;
+}
+
+.weather-forecast-temperature-low {
+  opacity: 0.7;
+}
+
+
+.weather-app-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.weather-app-data,
+.weather-forecast {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+@media (max-width: 600px) {
+  .weather-app-container {
+    width: 95%; 
   }
-  
-  .Weather .row {
-    margin-top: 20px;
-  }
-  
+
+
+}

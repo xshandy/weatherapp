@@ -1,102 +1,128 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
-import FormattedDate from "./FormattedDate";
+import WeatherTemperature from "./WeatherTemperature";  
 import "./Weather.css";
-import WeatherTemperature from "./WeatherTemperature";
 
-export default function Weather(props) {
-  const [weatherData, setWeatherData] = useState({ ready: false });
-  const [city, setCity] = useState(props.defaultCity || "London"); 
-  const [inputCity, setInputCity] = useState(props.defaultCity || "London"); 
+function Weather({ city }) {
+  const [weatherData, setWeatherData] = useState(null);
+  const [forecastData, setForecastData] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
+  const apiKey = "04ate034e9ce8febe66dc16ff8de2o76";  
+
+  
+  const searchCity = useCallback((city) => {
+    setLoading(true);
+    const apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
+    axios
+      .get(apiUrl)
+      .then((response) => {
+        console.log("Current weather data:", response.data);
+        setWeatherData(response.data);
+        getForecast(city); 
+      })
+      .catch((error) => {
+        console.error("Error fetching current weather:", error);
+        setLoading(false);
+        setError("Error fetching current weather.");
+      });
+  }, []);
+
+
+  function getForecast(city) {
+    const apiUrl = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}&units=metric`;
+    axios
+      .get(apiUrl)
+      .then((response) => {
+        console.log("Forecast data:", response.data);
+        setForecastData(response.data.daily.slice(1, 6));
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching forecast:", error);
+        setLoading(false);
+        setError("Error fetching forecast.");
+      });
+  }
+
+  
+  function formatDate(timestamp) {
+    const date = new Date(timestamp * 1000);
+    const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    const day = dayNames[date.getDay()];
+    const hours = date.getHours().toString().padStart(2, "0"); 
+    const minutes = date.getMinutes().toString().padStart(2, "0"); 
+    return `${day} ${hours}:${minutes}`; 
+  }
+
+ 
+  function formatDay(timestamp) {
+    const date = new Date(timestamp * 1000);
+    const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    return dayNames[date.getDay()];
+  }
+
+  
   useEffect(() => {
-    function search() {
-        const apiKey = "6643c7326a4c2a38838264a28531d97e";
-        let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
-        axios
-          .get(apiUrl)
-          .then(handleResponse)
-          .catch(handleError);
-      }
-    
     if (city) {
-      search();
+      searchCity(city);
     }
-  }, [city]); 
+  }, [city, searchCity]);
 
-  function handleResponse(response) {
-    setWeatherData({
-      ready: true,
-      temperature: response.data.main.temp,
-      wind: response.data.wind.speed,
-      date: new Date(response.data.dt * 1000),
-      humidity: response.data.main.humidity,
-      city: response.data.name,
-      description: response.data.weather[0].description,
-      iconUrl: `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`,
-    });
-  }
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>{error}</div>;
+  if (!weatherData) return <div>No data available.</div>;
 
-  function handleError(error) {
-    console.error("Error fetching weather data:", error);
-    alert("Sorry, there was an error fetching the weather data.");
-  }
-
-
-  function handleSubmit(event) {
-    event.preventDefault();
-    setCity(inputCity); 
-  }
-
-  function handleInputChange(event) {
-    setInputCity(event.target.value); 
-  }
-
-  if (weatherData.ready) {
-    return (
-      <div className="Weather">
-        <div className="Weather-header">
-          <h1>{weatherData.city}</h1>
-          <div className="search-container">
-            <form onSubmit={handleSubmit}>
-              <input
-                type="search"
-                placeholder="Enter a city.."
-                className="form-control"
-                value={inputCity}
-                onChange={handleInputChange}
-              />
-              <input
-                type="submit"
-                value="Search"
-                className="btn btn-primary w-100"
-              />
-            </form>
-          </div>
-        </div>
-       
-        <ul>
-          <li>
-            <FormattedDate date={weatherData.date} />
-            </li>
-          <li className="text-capitalize">{weatherData.description}</li>
-        </ul>
-        
-        <div className="row">
-          <div className="col-6">
-            <img src={weatherData.iconUrl} alt={weatherData.description} />
-            <WeatherTemperature celsius={weatherData.temperature} />
-          </div>
-          <div className="col-6">
-            <ul>
-              <li>Humidity: {weatherData.humidity}%</li>
-              <li>Wind: {weatherData.wind} km/h</li>
-            </ul>
-          </div>
+  return (
+    <div className="weather-app-container">
+    <div className="weather-app-data">
+      <div className="weather-app-left">
+      <div className="weather-app-city">{weatherData.city}</div>
+      <div className="weather-app-date">{formatDate(weatherData.time)}</div> 
+      </div>
+      <div className="weather-app-right">
+      <div className="weather-app-temperature-container">
+        <img
+          src={weatherData.condition.icon_url}
+          alt="Weather Icon"
+          className="weather-app-icon"
+        />
+        <div>
+          <WeatherTemperature celsius={weatherData.temperature.current} />
         </div>
       </div>
-    );
-  } else {
-    return "Loading...";
-  }
+        <div className="weather-app-details">
+          {weatherData.condition.description}
+          <br />
+          Humidity: {weatherData.temperature.humidity}%  Wind: {weatherData.wind.speed} km/h
+        </div>
+      </div>
+      </div>
+
+      
+      <div className="weather-forecast">
+        {forecastData.map((day, index) => (
+          <div key={index} className="weather-forecast-day">
+            <div className="weather-forecast-date">
+              {formatDay(day.time)}
+            </div>
+            <img
+              src={day.condition.icon_url}
+              alt="Forecast Icon"
+              className="weather-forecast-icon"
+            />
+            <div className="weather-forecast-temperatures">
+              <span className="weather-forecast-temperature">
+                {Math.round(day.temperature.maximum)}º
+              </span>
+              <span className="weather-forecast-temperature-low">{Math.round(day.temperature.minimum)}º</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 }
+
+export default Weather;
